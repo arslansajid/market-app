@@ -1,14 +1,18 @@
 # Market App
 
+## Testing URL
+
+https://thirdlove-beabd.web.app
+
 Technology Stack:
 
-### React.js with Typescript
+### 1-React.js with Typescript
 
-### Redux
+### 2-Redux
 
-### Redux-Saga
+### 3-Redux-Saga
 
-### Styled-components
+### 4-Styled-components
 
 ## Available Scripts
 
