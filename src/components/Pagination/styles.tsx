@@ -11,6 +11,7 @@ export const ListingsContainer = styled.div`
 export const LoadingContainer = styled.div`
   ${FlexParentCenter};
   width: 100%;
+  min-height: 300px;
 `;
 
 // Use inner class names to style the controls.
@@ -35,6 +36,10 @@ export const ReactStyledPaginate = styled(ReactPaginate).attrs({
 
     @media only screen and (max-width: 767px) {
       padding: 0.32rem 0.32rem;
+    }
+
+    @media only screen and (max-width: 320px) {
+      padding: 2px;
     }
   }
   li.previous a,

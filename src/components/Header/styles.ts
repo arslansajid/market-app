@@ -17,7 +17,7 @@ export const LogoContainer = styled.div`
   transform: translate(-50%, 0);
 
   @media only screen and (max-width: 767px) {
-    left: 3rem;
+    left: 2.25rem;
     transform: none;
   }
 `;

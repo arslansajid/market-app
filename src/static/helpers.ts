@@ -20,3 +20,33 @@ export const getImage = (filter: FilterTypes) => {
 export const roundtoDigits = (number: number, digits: number) => {
   return Number(number).toFixed(digits);
 };
+
+function detectMob() {
+  const toMatch = [
+    /Android/i,
+    /webOS/i,
+    /iPhone/i,
+    /iPad/i,
+    /iPod/i,
+    /BlackBerry/i,
+    /Windows Phone/i,
+  ];
+
+  return toMatch.some((toMatchItem) => {
+    return navigator.userAgent.match(toMatchItem);
+  });
+}
+
+export enum EAppMode {
+  Mobile = "mobile",
+  Tablet = "tablet",
+  Desktop = "desktop",
+}
+
+export const getAppMode = (): EAppMode => {
+  const isMobile = detectMob();
+  if (isMobile) {
+    return EAppMode.Mobile;
+  }
+  return EAppMode.Desktop;
+};

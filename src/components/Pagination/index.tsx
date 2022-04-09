@@ -9,10 +9,12 @@ import React, { useEffect, useState } from "react";
 
 import { IStore } from "../../store/store.types";
 import LoadingScreen from "../LoadingScreen/LoadingScreen";
+import LoadingSpinner from "../LoadingScreen/LoadingSpinner";
 import { MainLoadingIcon } from "../LoadingScreen/BlankSlates";
 import NotFound from "../../assets/images/NotFound.png";
 import ProductTile from "../ProductTile";
 import { ProductType } from "../../types/product.types";
+import { getAppMode } from "../../static/helpers";
 import { useSelector } from "react-redux";
 
 interface currentItemsProps {
@@ -21,14 +23,22 @@ interface currentItemsProps {
 
 const Items: React.FC<currentItemsProps> = ({ currentItems }) => {
   const isLoading = useSelector((state: IStore) => state.app.isLoading);
+
+  const mode = getAppMode();
+  const isMobile = mode === "mobile";
+
   return (
     <>
       <ListingsContainer>
         {isLoading ? (
           <LoadingContainer>
-            <LoadingScreen>
-              <MainLoadingIcon />
-            </LoadingScreen>
+            {isMobile ? (
+              <LoadingSpinner />
+            ) : (
+              <LoadingScreen>
+                <MainLoadingIcon />
+              </LoadingScreen>
+            )}
           </LoadingContainer>
         ) : (
           <Row>
