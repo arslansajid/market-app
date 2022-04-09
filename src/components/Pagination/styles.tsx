@@ -12,6 +12,14 @@ export const LoadingContainer = styled.div`
   ${FlexParentCenter};
   width: 100%;
   min-height: 300px;
+
+  @media only screen and (max-width: 767px) {
+    min-width: 75vw;
+  }
+
+  @media only screen and (max-width: 500px) {
+    min-width: 60vw;
+  }
 `;
 
 // Use inner class names to style the controls.
