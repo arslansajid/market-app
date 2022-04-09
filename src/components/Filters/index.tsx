@@ -1,5 +1,9 @@
 import { Container, FilterButton } from "./styles";
 import React, { useCallback, useEffect } from "react";
+import {
+  setProductsByCategory,
+  setVisibleProducts,
+} from "../../store/actions/products";
 import { useDispatch, useSelector } from "react-redux";
 
 import { FilterTypes } from "../../types/filters.types";
@@ -7,7 +11,6 @@ import { IStore } from "../../store/store.types";
 import { ProductType } from "../../types/product.types";
 import { setCategoryFilter } from "../../store/actions/filters";
 import { setIsLoading } from "../../store/actions/app";
-import { setVisibleProducts } from "../../store/actions/products";
 
 interface FiltersProps {}
 
@@ -46,6 +49,15 @@ const Filters: React.FC<FiltersProps> = () => {
         return () => {};
     }
   }, []);
+
+  useEffect(() => {
+    if (allItems.length) {
+      const filterByCategoryItems = allItems.filter(
+        (x) => x.itemType === selectedFilter
+      );
+      dispatch(setProductsByCategory(filterByCategoryItems));
+    }
+  }, [allItems, dispatch, selectedFilter]);
 
   useEffect(() => {
     let products = [...allItems];

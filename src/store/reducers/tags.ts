@@ -1,5 +1,10 @@
+import {
+  RECEIVE_PRODUCTS,
+  SET_PRODUCTS_BY_CATEGORY,
+} from "../actions/products";
+
 import { FILTER_TAGS } from "../actions/tags";
-import { SET_VISIBLE_PRODUCTS } from "../actions/products";
+import { TagMapType } from "../../types/tags.types";
 import { combineReducers } from "redux";
 import { countBy } from "lodash";
 
@@ -21,11 +26,11 @@ interface ProductType {
   tags: string[];
 }
 
-type FilteredTagsType = any;
+type FilteredTagsType = TagMapType & any;
 
 function allTags(state = initialState.tags, action: ActionType) {
   switch (action.type) {
-    case SET_VISIBLE_PRODUCTS:
+    case RECEIVE_PRODUCTS:
       const tags: string[] = [];
       action.products.forEach((product: ProductType) => {
         tags.push(...product.tags);
@@ -39,7 +44,7 @@ function allTags(state = initialState.tags, action: ActionType) {
 
 function tags(state = initialState.tags, action: ActionType) {
   switch (action.type) {
-    case SET_VISIBLE_PRODUCTS:
+    case SET_PRODUCTS_BY_CATEGORY:
       const tags: string[] = [];
       action.products.forEach((product: ProductType) => {
         tags.push(...product.tags);
@@ -55,7 +60,7 @@ function filterTerm(state = initialState.filterTerm, action: ActionType) {
   switch (action.type) {
     case FILTER_TAGS:
       return action.tag;
-    case SET_VISIBLE_PRODUCTS:
+    case RECEIVE_PRODUCTS:
       return "";
     default:
       return state;
@@ -65,7 +70,7 @@ function filterTerm(state = initialState.filterTerm, action: ActionType) {
 function visibleTags(state = initialState.visibleTags, action: ActionType) {
   const { tag, items } = action;
   switch (action.type) {
-    case SET_VISIBLE_PRODUCTS:
+    case SET_PRODUCTS_BY_CATEGORY:
       const tags: string[] = [];
       action.products.forEach((product: ProductType) => {
         tags.push(...product.tags);
