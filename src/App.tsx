@@ -1,26 +1,50 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { ThemeProvider, createGlobalStyle } from "styled-components";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import MainView from "./containers/MainView";
+import { ModalProvider } from "styled-react-modal";
+import OpenSans from "./assets/fonts/OpenSans/OpenSans.ttf";
+import React from "react";
+import { colors } from "./theme/Colors";
+import styled from "styled-components";
+import { theme } from "./theme/ThemeConfig";
+
+// Add global styles
+const GlobalStyle = createGlobalStyle`
+@font-face {
+  font-family: 'Open Sans';
+  src: url(${OpenSans}) format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
+ body {
+   margin: 0;
+   padding: 0;
+   font-family: sans-serif;
+   background: ${colors.backgroundColor};
+ }
+`;
+
+export const AppContainer = styled.div<{ isLoading: boolean }>`
+  filter: blur(${({ isLoading }) => (isLoading ? "5px" : "0")});
+`;
+
+const App: React.FC = () => {
+  return (
+    <>
+      <GlobalStyle />
+      <ThemeProvider theme={theme}>
+        <ModalProvider>
+          <AppContainer isLoading={false}>
+            <Header />
+            <MainView />
+            <Footer />
+          </AppContainer>
+        </ModalProvider>
+      </ThemeProvider>
+    </>
+  );
+};
 
 export default App;
