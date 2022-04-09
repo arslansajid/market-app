@@ -14,6 +14,7 @@ export type StoreAppType = {
 export type StoreProductsType = {
   allProducts: ProductType[];
   visibleProducts: ProductType[];
+  productsByCategory: ProductType[];
 };
 
 export type StoreCartType = {
