@@ -76,6 +76,13 @@ const Pagination: React.FC<PaginationProps> = ({ itemsPerPage }) => {
   // Here we use item offsets; we could also use page offsets
   // following the API or data you're working with.
   const [itemOffset, setItemOffset] = useState(0);
+  const [remountComponent, setRemountComponent] = useState(0);
+
+  // move to first page when the total items changes
+  useEffect(() => {
+    setItemOffset(0);
+    setRemountComponent(Math.random());
+  }, [items]);
 
   useEffect(() => {
     // Fetch items from another resources.
@@ -93,18 +100,20 @@ const Pagination: React.FC<PaginationProps> = ({ itemsPerPage }) => {
   };
 
   return (
-    <>
+    <div key={remountComponent}>
       <Items currentItems={currentItems} />
-      <ReactStyledPaginate
-        onPageChange={handlePageClick}
-        breakLabel="..."
-        nextLabel="Next"
-        pageRangeDisplayed={5}
-        pageCount={pageCount}
-        previousLabel="Prev"
-        // renderOnZeroPageCount={null}
-      />
-    </>
+      {items.length > 0 && (
+        <ReactStyledPaginate
+          onPageChange={handlePageClick}
+          breakLabel="..."
+          nextLabel="Next"
+          pageRangeDisplayed={3}
+          pageCount={pageCount}
+          previousLabel="Prev"
+          // renderOnZeroPageCount={null}
+        />
+      )}
+    </div>
   );
 };
 

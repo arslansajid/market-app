@@ -6,6 +6,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   margin: 40px 0;
+  overflow-x: hidden;
 `;
 
 export const SmFilterContainer = styled.div`
