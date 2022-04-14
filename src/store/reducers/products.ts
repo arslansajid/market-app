@@ -1,10 +1,12 @@
 import {
+  FILTER_PRODUCTS,
   RECEIVE_PRODUCTS,
   SET_PRODUCTS_BY_CATEGORY,
-  SET_VISIBLE_PRODUCTS,
 } from "../actions/products";
 
 import { ProductType } from "../../types/product.types";
+import { StoreFiltersType } from "../store.types";
+import { applyCustomSortFilter } from "../../static/helpers";
 import { combineReducers } from "redux";
 
 const initialState = {
@@ -16,6 +18,7 @@ const initialState = {
 interface ActionType {
   type: string;
   products: ProductType[];
+  filters: StoreFiltersType;
 }
 
 function allProducts(state = initialState.allProducts, action: ActionType) {
@@ -31,10 +34,40 @@ function visibleProducts(
   state = initialState.visibleProducts,
   action: ActionType
 ) {
-  const { products } = action;
+  const { products, filters } = action;
   switch (action.type) {
-    case SET_VISIBLE_PRODUCTS:
-      return [...products];
+    case FILTER_PRODUCTS:
+      const { brandFilter, sortFilter, tagFilter } = filters;
+      let tempProducts = [...products];
+
+      const filterByBrand: ProductType[] = [];
+      if (brandFilter?.length) {
+        brandFilter.forEach((brandItem: string) => {
+          tempProducts.forEach((product: ProductType) => {
+            if (product.manufacturer === brandItem) {
+              filterByBrand.push(product);
+            }
+          });
+        });
+        tempProducts = [...filterByBrand];
+      }
+
+      const filterByTag: ProductType[] = [];
+      if (tagFilter?.length) {
+        tagFilter.forEach((tag: string) => {
+          tempProducts.forEach((product: ProductType) => {
+            if (product.tags.includes(tag)) {
+              filterByTag.push(product);
+            }
+          });
+        });
+        tempProducts = [...filterByTag];
+      }
+
+      const filterBySort = applyCustomSortFilter(sortFilter, tempProducts);
+      tempProducts = [...filterBySort];
+
+      return [...tempProducts];
     default:
       return state;
   }

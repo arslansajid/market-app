@@ -2,6 +2,7 @@ import { FilterTypes } from "../components/Filters/filters.types";
 import Mugs from "../assets/images/mugs.jpeg";
 import Mugs2 from "../assets/images/mugs2.jpeg";
 import Mugs3 from "../assets/images/mugs3.jpeg";
+import { ProductType } from "../types/product.types";
 import Shirt from "../assets/images/shirt1.jpg";
 import Shirt2 from "../assets/images/shirt2.jpeg";
 import Shirt3 from "../assets/images/shirt3.jpeg";
@@ -49,4 +50,26 @@ export const getAppMode = (): EAppMode => {
     return EAppMode.Mobile;
   }
   return EAppMode.Desktop;
+};
+
+export const applyCustomSortFilter = (
+  filterVal: number,
+  products: ProductType[]
+) => {
+  switch (filterVal) {
+    case 1:
+      return products.sort(
+        (a: any, b: any) => parseFloat(a.price) - parseFloat(b.price)
+      );
+    case 2:
+      return products.sort(
+        (a: any, b: any) => parseFloat(b.price) - parseFloat(a.price)
+      );
+    case 3:
+      return products.sort((a: any, b: any) => a.added - b.added);
+    case 4:
+      return products.sort((a: any, b: any) => b.added - a.added);
+    default:
+      return [];
+  }
 };
