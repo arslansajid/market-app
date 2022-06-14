@@ -25,14 +25,6 @@ const CartItem: React.FC<CartItemProps> = ({
   handleAddItem,
   handleRemoveItem,
 }) => {
-  const handleIncrement = () => {
-    handleAddItem();
-  };
-
-  const handleDecrement = () => {
-    handleRemoveItem();
-  };
-
   return (
     <Container>
       <ProductSection>
@@ -40,9 +32,9 @@ const CartItem: React.FC<CartItemProps> = ({
         <PriceText>₺{price}</PriceText>
       </ProductSection>
       <CountSection>
-        <CounterButton onClick={handleDecrement}>&#8722;</CounterButton>
+        <CounterButton onClick={handleRemoveItem}>&#8722;</CounterButton>
         <ValueContainer>{quantity}</ValueContainer>
-        <CounterButton onClick={handleIncrement}>&#43;</CounterButton>
+        <CounterButton onClick={handleAddItem}>&#43;</CounterButton>
       </CountSection>
     </Container>
   );

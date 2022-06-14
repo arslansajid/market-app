@@ -14,7 +14,7 @@ export const SmFilterContainer = styled.div`
   display: none;
   padding: 10px 0;
 
-  @media only screen and (max-width: 767px) {
+  @media only screen and (max-width: 1023px) {
     display: block;
   }
 `;

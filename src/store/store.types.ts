@@ -3,7 +3,7 @@ import { FilterTypes } from "../types/filters.types";
 import { ProductType } from "../types/product.types";
 import { TagMapType } from "../types/tags.types";
 
-type KeyValueType = {
+export type KeyValueType = {
   [key: string]: number | undefined;
 };
 

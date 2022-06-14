@@ -8,11 +8,11 @@ import {
 } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 
-import { IStore } from "../../store/store.types";
 import { ProductType } from "../../types/product.types";
 import React from "react";
 import { addToCart } from "../../store/actions/cart";
 import { getImage } from "../../static/helpers";
+import { selectCategoryFilter } from "../../store/selectors/filters";
 
 interface ProductTileProps {
   name: string;
@@ -22,12 +22,12 @@ interface ProductTileProps {
 
 const ProductTile: React.FC<ProductTileProps> = ({ name, price, item }) => {
   const dispatch = useDispatch();
-  const filter = useSelector((state: IStore) => state.filters.categoryFilter);
+  const filter = useSelector(selectCategoryFilter);
 
   return (
     <Container>
       <ImageContainer>
-        <ImageBox src={getImage(filter)} />
+        <ImageBox alt={`${name}-img`} src={getImage(filter)} />
       </ImageContainer>
       <PriceText>₺ {price}</PriceText>
       <NameText>{name}</NameText>

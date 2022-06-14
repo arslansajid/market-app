@@ -30,7 +30,6 @@ export const ReactStyledPaginate = styled(ReactPaginate).attrs({
   margin: 2rem 0;
   display: flex;
   flex-direction: row;
-  // flex-wrap: wrap;
   justify-content: space-evenly;
   list-style-type: none;
   padding: 0 1rem;

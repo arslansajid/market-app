@@ -6,22 +6,26 @@ import {
   TotalContainer,
 } from "./styles";
 import { addToCart, removeFromCart } from "../../store/actions/cart";
+import {
+  selectQuantityById,
+  selectTotalPrice,
+} from "../../store/selectors/cart";
 import { useDispatch, useSelector } from "react-redux";
 
 import CartItem from "../../components/CartItem";
 import FilterBox from "../../components/FilterBox";
-import { IStore } from "../../store/store.types";
 import { ProductType } from "../../types/product.types";
 import React from "react";
 import emptyCart from "../../assets/images/cart-empty.png";
+import { selectAllProducts } from "../../store/selectors/products";
 
 interface CartProps {}
 
 const Cart: React.FC<CartProps> = () => {
   const dispatch = useDispatch();
-  const cartItems = useSelector((state: IStore) => state.cart.quantityById);
-  const totalPrice = useSelector((state: IStore) => state.cart.totalPrice);
-  const products = useSelector((state: IStore) => state.products.allProducts);
+  const cartItems = useSelector(selectQuantityById);
+  const totalPrice = useSelector(selectTotalPrice);
+  const products = useSelector(selectAllProducts);
   const cartItemsNames = Object.keys(cartItems);
 
   return (

@@ -7,10 +7,11 @@ import {
 } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 
-import { IStore } from "../../store/store.types";
 import LoadingScreen from "../LoadingScreen/LoadingScreen";
 import React from "react";
 import { SideBarLoadingIcon } from "../LoadingScreen/BlankSlates";
+import { selectAppIsLoading } from "../../store/selectors/app";
+import { selectSortFilter } from "../../store/selectors/filters";
 import { setSortFilter } from "../../store/actions/filters";
 import { sortFilterOptions } from "../../static/filters";
 
@@ -18,10 +19,8 @@ interface SortFilterProps {}
 
 const SortFilter: React.FC<SortFilterProps> = () => {
   const dispatch = useDispatch();
-  const isLoading = useSelector((state: IStore) => state.app.isLoading);
-  const selectedFilter = useSelector(
-    (state: IStore) => state.filters.sortFilter
-  );
+  const isLoading = useSelector(selectAppIsLoading);
+  const selectedFilter = useSelector(selectSortFilter);
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;

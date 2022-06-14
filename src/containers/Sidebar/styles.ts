@@ -1,10 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-  // @media screen and (max-width: 700px) {
-  //   display: none;
-  // }
-`;
+export const Container = styled.div``;
 
 export const BoxContainer = styled.div`
   margin: 12px 0 24px 0;

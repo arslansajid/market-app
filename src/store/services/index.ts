@@ -5,7 +5,7 @@
 import { brands } from "../../static/brands";
 import { items } from "../../static/items";
 
-const TIMEOUT = 3000; // 3 second wait for test purposes
+const TIMEOUT = 2000; // 2 second wait for test purposes
 
 export const api = {
   getProducts() {

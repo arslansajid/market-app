@@ -8,12 +8,14 @@ import {
   SearchInput,
 } from "./styles";
 import React, { useState } from "react";
+import { selectAllTags, selectVisibleTags } from "../../store/selectors/tags";
 import { useDispatch, useSelector } from "react-redux";
 
-import { IStore } from "../../store/store.types";
 import LoadingScreen from "../LoadingScreen/LoadingScreen";
 import { SideBarLoadingIcon } from "../LoadingScreen/BlankSlates";
 import { filterTags } from "../../store/actions/tags";
+import { selectAppIsLoading } from "../../store/selectors/app";
+import { selectTagFilter } from "../../store/selectors/filters";
 import { setTagFilter } from "../../store/actions/filters";
 
 interface TagFilterProps {}
@@ -21,13 +23,11 @@ interface TagFilterProps {}
 const TagFilter: React.FC<TagFilterProps> = () => {
   const dispatch = useDispatch();
   const [searchInput, setSearchInput] = useState("");
-  const isLoading = useSelector((state: IStore) => state.app.isLoading);
-  const allTags = useSelector((state: IStore) => state.tags.tags);
-  const visibleTags = useSelector((state: IStore) => state.tags.visibleTags);
+  const isLoading = useSelector(selectAppIsLoading);
+  const allTags = useSelector(selectAllTags);
+  const visibleTags = useSelector(selectVisibleTags);
 
-  const selectedFilter = useSelector(
-    (state: IStore) => state.filters.tagFilter
-  );
+  const selectedFilter = useSelector(selectTagFilter);
 
   const tagNames = Object.keys(visibleTags);
 

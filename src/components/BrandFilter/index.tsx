@@ -8,13 +8,18 @@ import {
   SearchInput,
 } from "./styles";
 import React, { useState } from "react";
+import {
+  selectAllBrands,
+  selectVisibleBrands,
+} from "../../store/selectors/brands";
 import { useDispatch, useSelector } from "react-redux";
 
 import { BrandType } from "../../types/brand.types";
-import { IStore } from "../../store/store.types";
 import LoadingScreen from "../LoadingScreen/LoadingScreen";
 import { SideBarLoadingIcon } from "../LoadingScreen/BlankSlates";
 import { filterBrands } from "../../store/actions/brands";
+import { selectAppIsLoading } from "../../store/selectors/app";
+import { selectBrandFilter } from "../../store/selectors/filters";
 import { setBrandFilter } from "../../store/actions/filters";
 
 interface BrandFilterProps {}
@@ -22,12 +27,10 @@ interface BrandFilterProps {}
 const BrandFilter: React.FC<BrandFilterProps> = () => {
   const dispatch = useDispatch();
   const [searchInput, setSearchInput] = useState("");
-  const selectedFilter = useSelector(
-    (state: IStore) => state.filters.brandFilter
-  );
-  const isLoading = useSelector((state: IStore) => state.app.isLoading);
-  const allBrands = useSelector((state: IStore) => state.brands.brands);
-  const brands = useSelector((state: IStore) => state.brands.visibleBrands);
+  const selectedFilter = useSelector(selectBrandFilter);
+  const isLoading = useSelector(selectAppIsLoading);
+  const allBrands = useSelector(selectAllBrands);
+  const brands = useSelector(selectVisibleBrands);
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
