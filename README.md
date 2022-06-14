@@ -198,12 +198,16 @@ src
    |   |   |-- products.ts
    |   |   |-- tags.ts
    |   |-- sagas
-   |   |   |-- __tests__
-   |   |   |   |-- cart.js
-   |   |   |   |-- products.js
    |   |   |-- brands.ts
    |   |   |-- index.ts
    |   |   |-- products.ts
+   |   |-- selectors
+   |   |   |-- app.ts
+   |   |   |-- brands.ts
+   |   |   |-- cart.ts
+   |   |   |-- filters.ts
+   |   |   |-- products.ts
+   |   |   |-- tags.ts
    |   |-- services
    |   |   |-- index.ts
    |   |-- store.types.ts
