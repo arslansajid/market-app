@@ -4,11 +4,16 @@ import {
   filterProducts,
   setProductsByCategory,
 } from "../../store/actions/products";
+import {
+  selectAllFilters,
+  selectCategoryFilter,
+} from "../../store/selectors/filters";
 import { useDispatch, useSelector } from "react-redux";
 
 import { FilterTypes } from "../../types/filters.types";
-import { IStore } from "../../store/store.types";
 import { ProductType } from "../../types/product.types";
+import { selectAllProducts } from "../../store/selectors/products";
+import { selectAppIsLoading } from "../../store/selectors/app";
 import { setCategoryFilter } from "../../store/actions/filters";
 import { setIsLoading } from "../../store/actions/app";
 
@@ -19,12 +24,10 @@ const Filters: React.FC<FiltersProps> = () => {
   const [categorizedProducts, setCategorizedProducts] = useState<ProductType[]>(
     []
   );
-  const isLoading = useSelector((state: IStore) => state.app.isLoading);
-  const storeFilters = useSelector((state: IStore) => state.filters);
-  const allItems = useSelector((state: IStore) => state.products.allProducts);
-  const selectedFilter = useSelector(
-    (state: IStore) => state.filters.categoryFilter
-  );
+  const isLoading = useSelector(selectAppIsLoading);
+  const storeFilters = useSelector(selectAllFilters);
+  const allItems = useSelector(selectAllProducts);
+  const selectedFilter = useSelector(selectCategoryFilter);
 
   useEffect(() => {
     if (allItems.length) {

@@ -8,15 +8,15 @@ import {
 import { Col, Grid, Row } from "react-styled-flexboxgrid";
 
 import { ReactComponent as Basket } from "../../assets/images/Basket.svg";
-import { IStore } from "../../store/store.types";
 import LogoPng from "../../assets/images/Logo.png";
 import React from "react";
+import { selectTotalPrice } from "../../store/selectors/cart";
 import { useSelector } from "react-redux";
 
 interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = () => {
-  const totalPrice = useSelector((state: IStore) => state.cart.totalPrice);
+  const totalPrice = useSelector(selectTotalPrice);
 
   return (
     <Container>

@@ -7,7 +7,6 @@ import {
 } from "./styles";
 import React, { useEffect, useState } from "react";
 
-import { IStore } from "../../store/store.types";
 import LoadingScreen from "../LoadingScreen/LoadingScreen";
 import LoadingSpinner from "../LoadingScreen/LoadingSpinner";
 import { MainLoadingIcon } from "../LoadingScreen/BlankSlates";
@@ -15,6 +14,8 @@ import NotFound from "../../assets/images/NotFound.png";
 import ProductTile from "../ProductTile";
 import { ProductType } from "../../types/product.types";
 import { getAppMode } from "../../static/helpers";
+import { selectAppIsLoading } from "../../store/selectors/app";
+import { selectVisibleProducts } from "../../store/selectors/products";
 import { useSelector } from "react-redux";
 
 interface currentItemsProps {
@@ -22,7 +23,7 @@ interface currentItemsProps {
 }
 
 const Items: React.FC<currentItemsProps> = ({ currentItems }) => {
-  const isLoading = useSelector((state: IStore) => state.app.isLoading);
+  const isLoading = useSelector(selectAppIsLoading);
 
   const mode = getAppMode();
   const isMobile = mode === "mobile";
@@ -69,7 +70,7 @@ interface PaginationProps {
 }
 
 const Pagination: React.FC<PaginationProps> = ({ itemsPerPage }) => {
-  const items = useSelector((state: IStore) => state.products.visibleProducts);
+  const items = useSelector(selectVisibleProducts);
   // We start with an empty list of items.
   const [currentItems, setCurrentItems] = useState<ProductType[]>([]);
   const [pageCount, setPageCount] = useState(0);
