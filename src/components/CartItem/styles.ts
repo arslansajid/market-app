@@ -22,12 +22,9 @@ export const Container = styled.div`
   }
 `;
 
-export const ProductSection = styled.div`
-  // flex: 1;
-`;
+export const ProductSection = styled.div``;
 
 export const CountSection = styled.div`
-  // flex: 1;
   display: flex;
   flex-direction: row;
   align-items: center;

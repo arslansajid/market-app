@@ -12,7 +12,6 @@ export const CartContainer = styled.div``;
 export const LoadingContainer = styled.div`
   ${FlexParentCenter};
   background: ${(props) => props.theme.white};
-  // width: 100%;
   padding: 20px;
   border-radius: 2px;
 `;

@@ -1,6 +1,3 @@
-// import {
-//   RECEIVE_PRODUCTS
-// } from '../actions/products';
 import { SET_IS_LOADING } from "../actions/app";
 import { StoreAppType } from "../store.types";
 import { combineReducers } from "redux";
