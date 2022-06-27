@@ -6,7 +6,6 @@ import MainView from "./containers/MainView";
 import { ModalProvider } from "styled-react-modal";
 import OpenSans from "./assets/fonts/OpenSans/OpenSans.ttf";
 import React from "react";
-import { colors } from "./theme/Colors";
 import styled from "styled-components";
 import { theme } from "./theme/ThemeConfig";
 
@@ -22,7 +21,7 @@ const GlobalStyle = createGlobalStyle`
    margin: 0;
    padding: 0;
    font-family: sans-serif;
-   background: ${colors.backgroundColor};
+   background: ${theme.backgroundColor};
  }
 `;
 

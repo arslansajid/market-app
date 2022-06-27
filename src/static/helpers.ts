@@ -1,4 +1,4 @@
-import { FilterTypes } from "../components/Filters/filters.types";
+import { FilterTypes } from "../types/filters.types";
 import Mugs from "../assets/images/mugs.jpeg";
 import Mugs2 from "../assets/images/mugs2.jpeg";
 import Mugs3 from "../assets/images/mugs3.jpeg";

@@ -49,11 +49,6 @@ export const ValueContainer = styled.div`
   margin: 0 8px;
 `;
 
-export const Divider = styled.hr`
-  color: rgba(0, 0, 0, 0.65);
-  margin-left: -100px;
-`;
-
 export const NameText = styled.div`
   color: ${(props) => props.theme.textColor};
   font-family: "Open Sans";
@@ -72,6 +67,5 @@ export const PriceText = styled.span`
   font-weight: 600;
   font-size: 14px;
   line-height: 18px;
-
   letter-spacing: 0.16px;
 `;
