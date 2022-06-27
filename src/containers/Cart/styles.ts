@@ -5,7 +5,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #1ea4ce;
+  background: ${(props) => props.theme.primaryColor};
   border-radius: 2px;
   padding: 8px;
 `;
