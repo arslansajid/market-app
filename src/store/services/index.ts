@@ -1,6 +1,11 @@
+/**
+ * Mocking client-server processing
+ */
 
 import { FilterTypes } from "../../types/filters.types";
 import axios from "axios";
+
+const API_URL = "http://localhost:8000";
 
 export type TParamType = {
   type?: FilterTypes;
@@ -14,7 +19,7 @@ export type TParamType = {
 export const api = {
   async getProducts(params?: TParamType) {
     const products = await axios
-      .get('/items', {
+      .get(`${API_URL}/items`, {
         params: {
           itemType: params?.type,
           manufacturer: params?.brand,
@@ -29,7 +34,7 @@ export const api = {
 
   async getBrands(params?: TParamType) {
     const brands = await axios
-      .get('/companies', {
+      .get(`${API_URL}/companies`, {
         params: {
           name_like: params?.searchTerm,
         },
