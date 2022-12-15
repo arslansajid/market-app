@@ -2,21 +2,44 @@
  * Mocking client-server processing
  */
 
-import { brands } from "../../static/brands";
-import { items } from "../../static/items";
+import { FilterTypes } from "../../types/filters.types";
+import axios from "axios";
 
-const TIMEOUT = 2000; // 2 second wait for test purposes
+const API_URL = "http://localhost:8000";
+
+export type TParamType = {
+  type?: FilterTypes;
+  brand?: string;
+  sortBy?: string;
+  sortOrder?: string;
+  tags?: string[],
+  searchTerm?: string
+};
 
 export const api = {
-  getProducts() {
-    return new Promise((resolve) => {
-      setTimeout(() => resolve(items), TIMEOUT);
-    });
+  async getProducts(params?: TParamType) {
+    const products = await axios
+      .get(`${API_URL}/items`, {
+        params: {
+          itemType: params?.type,
+          manufacturer: params?.brand,
+          tags: params?.tags,
+          _sort: params?.sortBy,
+          _order: params?.sortOrder,
+        },
+      })
+      .then((res) => res.data);
+    return products;
   },
 
-  getBrands() {
-    return new Promise((resolve) => {
-      setTimeout(() => resolve(brands), TIMEOUT);
-    });
+  async getBrands(params?: TParamType) {
+    const brands = await axios
+      .get(`${API_URL}/companies`, {
+        params: {
+          name_like: params?.searchTerm,
+        },
+      })
+      .then((res) => res.data);
+    return brands;
   },
 };
