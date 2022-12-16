@@ -89,7 +89,7 @@ const TagFilter: React.FC<TagFilterProps> = () => {
                 />
                 <CheckboxButtonLabel />
                 <Label>
-                  {tag} ({allTags[tag]})
+                  {tag} &nbsp; <span>({allTags[tag]})</span>
                 </Label>
               </Item>
             ))}
