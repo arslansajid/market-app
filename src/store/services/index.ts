@@ -1,7 +1,6 @@
+
 import { FilterTypes } from "../../types/filters.types";
 import axios from "axios";
-
-const API_URL = "http://localhost:8000";
 
 export type TParamType = {
   type?: FilterTypes;
@@ -15,7 +14,7 @@ export type TParamType = {
 export const api = {
   async getProducts(params?: TParamType) {
     const products = await axios
-      .get(`${API_URL}/items`, {
+      .get('/items', {
         params: {
           itemType: params?.type,
           manufacturer: params?.brand,
@@ -30,7 +29,7 @@ export const api = {
 
   async getBrands(params?: TParamType) {
     const brands = await axios
-      .get(`${API_URL}/companies`, {
+      .get('/companies', {
         params: {
           name_like: params?.searchTerm,
         },
