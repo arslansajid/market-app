@@ -69,7 +69,11 @@ export const Label = styled.div`
   display: flex;
   align-items: center;
   margin-top: 4px;
-  color: ${(props) => props.theme.labelColor}; ;
+  color: ${(props) => props.theme.labelColor};
+
+  span {
+    color: ${(props) => props.theme.placeholderColor};
+  }
 `;
 
 export const CheckboxButtonLabel = styled.label`
