@@ -7,13 +7,9 @@ import { FILTER_TAGS } from "../actions/tags";
 import { TagMapType } from "../../types/tags.types";
 import { combineReducers } from "redux";
 import { countBy } from "lodash";
+import { storeInitialState } from "../../static/store";
 
-const initialState = {
-  allTags: [],
-  tags: {},
-  filterTerm: "",
-  visibleTags: [],
-};
+const initialState = storeInitialState.tags;
 
 interface ActionType {
   type: string;

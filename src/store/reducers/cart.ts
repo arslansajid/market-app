@@ -7,11 +7,9 @@ import {
 import { StoreCartType } from "../store.types";
 import { combineReducers } from "redux";
 import { roundtoDigits } from "../../static/helpers";
+import { storeInitialState } from "../../static/store";
 
-const initialState: StoreCartType = {
-  totalPrice: 0,
-  quantityById: {},
-};
+const initialState: StoreCartType = storeInitialState.cart;
 
 interface ProductType {
   slug: string;

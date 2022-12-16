@@ -8,12 +8,9 @@ import { ProductType } from "../../types/product.types";
 import { StoreFiltersType } from "../store.types";
 import { applyCustomSortFilter } from "../../static/helpers";
 import { combineReducers } from "redux";
+import { storeInitialState } from "../../static/store";
 
-const initialState = {
-  allProducts: [],
-  visibleProducts: [],
-  productsByCategory: [],
-};
+const initialState = storeInitialState.products;
 
 interface ActionType {
   type: string;
