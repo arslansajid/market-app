@@ -3,13 +3,9 @@ import { FILTER_BRANDS, RECEIVE_BRANDS } from "../actions/brands";
 import { BrandType } from "../../types/brand.types";
 import { StoreBrandType } from "../store.types";
 import { combineReducers } from "redux";
+import { storeInitialState } from "../../static/store";
 
-const initialState: StoreBrandType = {
-  brands: [],
-  filterTerm: "",
-  visibleBrands: [],
-};
-
+const initialState: StoreBrandType = storeInitialState.brands;
 interface ActionType {
   type: string;
   brands: BrandType[];
