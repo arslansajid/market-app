@@ -9,4 +9,5 @@ export const theme = {
   headingColor: colors.headingColor,
   dividerColor: colors.dividerColor,
   labelColor: colors.labelColor,
+  placeholderColor: colors.placeholderColor
 };

@@ -7,7 +7,7 @@ import {
   ScrollContainer,
   SearchInput,
 } from "./styles";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
   selectAllBrands,
   selectVisibleBrands,
@@ -21,6 +21,8 @@ import { filterBrands } from "../../store/actions/brands";
 import { selectAppIsLoading } from "../../store/selectors/app";
 import { selectBrandFilter } from "../../store/selectors/filters";
 import { setBrandFilter } from "../../store/actions/filters";
+import { selectProductsByCategory } from "../../store/selectors/products";
+import { ProductType } from "../../types/product.types";
 
 interface BrandFilterProps {}
 
@@ -31,6 +33,7 @@ const BrandFilter: React.FC<BrandFilterProps> = () => {
   const isLoading = useSelector(selectAppIsLoading);
   const allBrands = useSelector(selectAllBrands);
   const brands = useSelector(selectVisibleBrands);
+  const categorizedProducts = useSelector(selectProductsByCategory);
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -53,6 +56,19 @@ const BrandFilter: React.FC<BrandFilterProps> = () => {
     setSearchInput(value);
     dispatch(filterBrands(value.toUpperCase().trim(), allBrands));
   };
+
+  const getBrandProductsCount = useCallback(
+    (brand: BrandType) => {
+      const brandsArray: any[] = [];
+      categorizedProducts.forEach((product: ProductType) => {
+        if (product.manufacturer === brand.slug) {
+          brandsArray.push(product);
+        }
+      });
+      return brandsArray.length;
+    },
+    [categorizedProducts]
+  );
 
   return (
     <Container>
@@ -89,7 +105,10 @@ const BrandFilter: React.FC<BrandFilterProps> = () => {
                   onChange={(event) => handleSelectChange(event)}
                 />
                 <CheckboxButtonLabel />
-                <Label>{brand.name}</Label>
+                <Label>
+                  {brand.name}&nbsp;
+                  <span>({getBrandProductsCount(brand)})</span>
+                </Label>
               </Item>
             ))}
           </>

@@ -66,10 +66,12 @@ export const Label = styled.div`
   font-size: 14px;
   line-height: 18px;
   letter-spacing: 0.16px;
-  display: flex;
-  align-items: center;
   margin-top: 4px;
-  color: ${(props) => props.theme.labelColor}; ;
+  color: ${(props) => props.theme.labelColor};
+
+  span {
+    color: ${(props) => props.theme.placeholderColor};
+  }
 `;
 
 export const CheckboxButtonLabel = styled.label`
