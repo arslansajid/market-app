@@ -53,7 +53,6 @@ export const Heading = styled.div`
   font-weight: 400;
   font-size: 20px;
   line-height: 26px;
-  /* identical to box height, or 130% */
 
   display: flex;
   align-items: center;

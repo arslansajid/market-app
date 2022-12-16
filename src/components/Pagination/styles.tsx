@@ -25,7 +25,7 @@ export const LoadingContainer = styled.div`
 // Use inner class names to style the controls.
 export const ReactStyledPaginate = styled(ReactPaginate).attrs({
   // You can redifine classes here, if you want.
-  activeClassName: "active", // default to "disabled"
+  activeClassName: "active",
 })`
   margin: 2rem 0;
   display: flex;
