@@ -9,7 +9,6 @@ import React from "react";
 import styled from "styled-components";
 import { theme } from "./theme/ThemeConfig";
 
-// Add global styles
 const GlobalStyle = createGlobalStyle`
 @font-face {
   font-family: 'Open Sans';
