@@ -1,4 +1,4 @@
-import { FILTER_BRANDS, RECEIVE_BRANDS } from "../actions/brands";
+import { RECEIVE_BRANDS } from "../actions/brands";
 
 import { BrandType } from "../../types/brand.types";
 import { StoreBrandType } from "../store.types";
@@ -21,30 +21,11 @@ function brands(state = initialState.brands, action: ActionType) {
   }
 }
 
-function filterTerm(state = initialState.filterTerm, action: ActionType) {
-  switch (action.type) {
-    case FILTER_BRANDS:
-      return action.brand;
-    case RECEIVE_BRANDS:
-      return "";
-    default:
-      return state;
-  }
-}
-
 function visibleBrands(state = initialState.visibleBrands, action: ActionType) {
-  const { brand, brands } = action;
+  const { brands } = action;
   switch (action.type) {
     case RECEIVE_BRANDS:
-      return action.brands;
-    case FILTER_BRANDS:
-      let filteredBrands: BrandType[] = [];
-      brands.forEach((brandItem: BrandType) => {
-        if (brandItem.name.toUpperCase().includes(brand)) {
-          filteredBrands.push(brandItem);
-        }
-      });
-      return filteredBrands;
+      return brands;
     default:
       return state;
   }
@@ -52,6 +33,5 @@ function visibleBrands(state = initialState.visibleBrands, action: ActionType) {
 
 export default combineReducers({
   brands,
-  filterTerm,
   visibleBrands,
 });

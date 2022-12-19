@@ -16,7 +16,6 @@ export const storeInitialState: IStore = {
   },
   brands: {
     brands: [],
-    filterTerm: "",
     visibleBrands: [],
   },
   tags: {
