@@ -88,7 +88,6 @@ const Pagination: React.FC<PaginationProps> = ({ itemsPerPage }) => {
   useEffect(() => {
     // Fetch items from another resources.
     const endOffset = itemOffset + itemsPerPage;
-    // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
     const initialItems = items.slice(itemOffset, endOffset);
     setCurrentItems([...initialItems]);
     setPageCount(Math.ceil(items.length / itemsPerPage));
@@ -111,7 +110,6 @@ const Pagination: React.FC<PaginationProps> = ({ itemsPerPage }) => {
           pageRangeDisplayed={3}
           pageCount={pageCount}
           previousLabel="Prev"
-          // renderOnZeroPageCount={null}
         />
       )}
     </div>

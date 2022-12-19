@@ -19,7 +19,6 @@ export const store = createStore(
 );
 sagaMiddleware.run(rootSaga);
 
-// As per react version 18
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );

@@ -24,7 +24,6 @@ export type StoreCartType = {
 
 export type StoreBrandType = {
   brands: BrandType[];
-  filterTerm: string;
   visibleBrands: BrandType[];
 };
 

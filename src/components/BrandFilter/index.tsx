@@ -7,33 +7,39 @@ import {
   ScrollContainer,
   SearchInput,
 } from "./styles";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
-  selectAllBrands,
-  selectVisibleBrands,
+  selectAllBrands
 } from "../../store/selectors/brands";
 import { useDispatch, useSelector } from "react-redux";
 
 import { BrandType } from "../../types/brand.types";
 import LoadingScreen from "../LoadingScreen/LoadingScreen";
 import { SideBarLoadingIcon } from "../LoadingScreen/BlankSlates";
-import { filterBrands } from "../../store/actions/brands";
 import { selectAppIsLoading } from "../../store/selectors/app";
 import { selectBrandFilter } from "../../store/selectors/filters";
 import { setBrandFilter } from "../../store/actions/filters";
 import { selectProductsByCategory } from "../../store/selectors/products";
 import { ProductType } from "../../types/product.types";
+import _ from "lodash";
+import { api } from "../../store/services";
 
 interface BrandFilterProps {}
 
 const BrandFilter: React.FC<BrandFilterProps> = () => {
   const dispatch = useDispatch();
   const [searchInput, setSearchInput] = useState("");
+  const [filteredBrands, setFilteredBrands] = useState<BrandType[]>([]);
   const selectedFilter = useSelector(selectBrandFilter);
   const isLoading = useSelector(selectAppIsLoading);
   const allBrands = useSelector(selectAllBrands);
-  const brands = useSelector(selectVisibleBrands);
   const categorizedProducts = useSelector(selectProductsByCategory);
+
+  useEffect(() => {
+    if (allBrands.length) {
+      setFilteredBrands(allBrands);
+    }
+  }, [allBrands]);
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -51,10 +57,25 @@ const BrandFilter: React.FC<BrandFilterProps> = () => {
     }
   };
 
+  const searchBrands = async (input: string) => {
+    const params = {
+      searchTerm: input,
+    };
+    const response = await api.getBrands(params);
+    setFilteredBrands(response);
+  };
+
+  /* eslint-disable */
+  const debounceSearchBrands = useCallback(_.debounce(searchBrands, 1000), []);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setSearchInput(value);
-    dispatch(filterBrands(value.toUpperCase().trim(), allBrands));
+    if(value === "") {
+      setFilteredBrands(allBrands);
+    } else {
+    debounceSearchBrands(value);
+    }
   };
 
   const getBrandProductsCount = useCallback(
@@ -95,7 +116,7 @@ const BrandFilter: React.FC<BrandFilterProps> = () => {
               <CheckboxButtonLabel />
               <Label>All</Label>
             </Item>
-            {brands.map((brand: BrandType) => (
+            {filteredBrands.map((brand: BrandType) => (
               <Item key={brand.slug}>
                 <CheckboxButton
                   type="checkbox"

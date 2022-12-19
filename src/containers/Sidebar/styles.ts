@@ -11,7 +11,6 @@ export const FilterTitle = styled.div`
   font-weight: 600;
   font-size: 13px;
   line-height: 18px;
-  /* identical to box height */
 
   display: flex;
   align-items: center;
