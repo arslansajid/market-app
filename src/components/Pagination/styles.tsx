@@ -9,23 +9,21 @@ export const ListingsContainer = styled.div`
 `;
 
 export const LoadingContainer = styled.div`
-  ${FlexParentCenter};
   width: 100%;
-  min-height: 300px;
 
   @media only screen and (max-width: 767px) {
     min-width: 75vw;
   }
 
   @media only screen and (max-width: 500px) {
-    min-width: 60vw;
+    min-width: 80vw;
   }
 `;
 
 // Use inner class names to style the controls.
 export const ReactStyledPaginate = styled(ReactPaginate).attrs({
   // You can redifine classes here, if you want.
-  activeClassName: "active",
+  activeClassName: "active", // default to "disabled"
 })`
   margin: 2rem 0;
   display: flex;
