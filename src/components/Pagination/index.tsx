@@ -7,16 +7,13 @@ import {
 } from "./styles";
 import React, { useEffect, useState } from "react";
 
-import LoadingScreen from "../LoadingScreen/LoadingScreen";
-import LoadingSpinner from "../LoadingScreen/LoadingSpinner";
-import { MainLoadingIcon } from "../LoadingScreen/BlankSlates";
 import NotFound from "../../assets/images/NotFound.png";
 import ProductTile from "../ProductTile";
 import { ProductType } from "../../types/product.types";
-import { getAppMode } from "../../static/helpers";
 import { selectAppIsLoading } from "../../store/selectors/app";
 import { selectVisibleProducts } from "../../store/selectors/products";
 import { useSelector } from "react-redux";
+import { List as LoadingSkeleton } from "react-content-loader";
 
 interface currentItemsProps {
   currentItems: ProductType[];
@@ -25,21 +22,14 @@ interface currentItemsProps {
 const Items: React.FC<currentItemsProps> = ({ currentItems }) => {
   const isLoading = useSelector(selectAppIsLoading);
 
-  const mode = getAppMode();
-  const isMobile = mode === "mobile";
-
   return (
-    <>
+    <div>
       <ListingsContainer>
         {isLoading ? (
           <LoadingContainer>
-            {isMobile ? (
-              <LoadingSpinner />
-            ) : (
-              <LoadingScreen>
-                <MainLoadingIcon />
-              </LoadingScreen>
-            )}
+            <LoadingSkeleton />
+            <LoadingSkeleton />
+            <LoadingSkeleton />
           </LoadingContainer>
         ) : (
           <Row>
@@ -61,7 +51,7 @@ const Items: React.FC<currentItemsProps> = ({ currentItems }) => {
           </Row>
         )}
       </ListingsContainer>
-    </>
+    </div>
   );
 };
 
