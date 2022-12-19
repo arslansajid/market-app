@@ -8,9 +8,7 @@ import {
   SearchInput,
 } from "./styles";
 import React, { useCallback, useEffect, useState } from "react";
-import {
-  selectAllBrands
-} from "../../store/selectors/brands";
+import { selectAllBrands } from "../../store/selectors/brands";
 import { useDispatch, useSelector } from "react-redux";
 
 import { BrandType } from "../../types/brand.types";
@@ -71,10 +69,10 @@ const BrandFilter: React.FC<BrandFilterProps> = () => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setSearchInput(value);
-    if(value === "") {
+    if (value === "") {
       setFilteredBrands(allBrands);
     } else {
-    debounceSearchBrands(value);
+      debounceSearchBrands(value);
     }
   };
 
